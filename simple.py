@@ -26,13 +26,15 @@ modes = [
 ]
 
 # defining a function that takes a model as an argument
-
 def generate(model, query):
 
     response = groq_client.chat.completion.create(
-        model=model[0],
+        model=model,
         messages=[
-            
-        ]
+            {"role": "system", "content":sys_prompt},
+            {"role": "user", "content": query}
+        ],
+        response_format = "text",
+        temperature = 0.1
     )
 
